@@ -35,8 +35,8 @@ def student_add():
 def add_student_info():
 	"""Add a student."""
 
-	firstname = request.form.get('first_name')
-	lastname = request.form.get('last_name')
+	firstname = request.form.get('firstname')
+	lastname = request.form.get('lastname')
 	github = request.form.get('github')
 	hackbright.make_new_student(firstname, lastname, github)
 	html = render_template("student_confirmation.html",
