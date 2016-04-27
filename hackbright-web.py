@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 import hackbright
 
@@ -22,6 +22,29 @@ def get_student():
     						last=last,
     						github=github)
     return html
+
+
+@app.route("/student-add")
+def student_add():
+	"""Add a student."""
+
+	return render_template("student_add.html")
+
+
+@app.route("/student-confirmation", methods=['POST'])
+def add_student_info():
+	"""Add a student."""
+
+	firstname = request.form.get('first_name')
+	lastname = request.form.get('last_name')
+	github = request.form.get('github')
+	hackbright.make_new_student(firstname, lastname, github)
+	html = render_template("student_confirmation.html",
+    						firstname=firstname,
+    						lastname=lastname,
+    						github=github)
+
+	return html
 
 
 if __name__ == "__main__":
