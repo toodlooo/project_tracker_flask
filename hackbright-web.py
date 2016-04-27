@@ -15,12 +15,18 @@ def get_student_form():
 def get_student():
     """Show information about a student."""
 
-    github = request.args.get('github', 'jhacks')
+    github = request.args.get('github')
     first, last, github = hackbright.get_student_by_github(github)
+    #print first, last, github
+    projects = hackbright.get_grades_by_github(github)
+    # [(u'Markov', 10), (u'Blockly', 2), (u'Markov', 10), (u'Blockly', 2)]
+    # print "MY ", projects
     html = render_template("student_info.html",
     						first=first,
     						last=last,
-    						github=github)
+    						github=github,
+    						projects=projects)
+
     return html
 
 
